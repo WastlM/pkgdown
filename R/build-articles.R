@@ -240,6 +240,8 @@ select_vignettes <- function(match_strings, vignettes) {
 default_articles_index <- function(pkg = ".") {
   pkg <- as_pkgdown(pkg)
 
+  if (length(pkg$vignettes$name) == 0L) return(NULL)
+
   print_yaml(list(
     list(
       title = "All vignettes",
