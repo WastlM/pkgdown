@@ -77,7 +77,7 @@ build_home <- function(pkg = ".", path = "docs", depth = 0L, encoding = "UTF-8",
     } else if (file_ext == "Rmd") {
       if (identical(file_name, "README")) {
         # Render once so that .md is up to date
-        message("Updating ", file_name, ".md")
+        cat_line("Updating ", file_name, ".md")
         callr::r_safe(
           function(input, encoding) {
             rmarkdown::render(
@@ -287,13 +287,14 @@ link_url <- function(text, href) {
 }
 
 linkify <- function(text) {
-  text <- gsub("<doi:([^>]+)>",
+  text <- escape_html(text)
+  text <- gsub("&lt;doi:([^&]+)&gt;",  # DOIs with < > & are not supported
                "&lt;<a href='https://doi.org/\\1'>doi:\\1</a>&gt;",
                text, ignore.case = TRUE)
-  text <- gsub("<arXiv:([^>]+)>",
+  text <- gsub("&lt;arXiv:([^&]+)&gt;",
                "&lt;<a href='https://arxiv.org/abs/\\1'>arXiv:\\1</a>&gt;",
                text, ignore.case = TRUE)
-  text <- gsub("<((http|ftp)[^>]+)>",
+  text <- gsub("&lt;((http|ftp)[^&]+)&gt;",  # URIs with & are not supported
                "&lt;<a href='\\1'>\\1</a>&gt;",
                text)
   text

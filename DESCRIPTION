@@ -11,6 +11,7 @@ Depends:
     R (>= 3.2.0)
 Imports: 
     callr (>= 2.0.2),
+    cli,
     desc,
     digest,
     evaluate,
@@ -29,7 +30,6 @@ Imports:
     rstudioapi,
     tibble,
     tools,
-    usethis,
     whisker,
     yaml,
     xml2 (>= 1.1.1),

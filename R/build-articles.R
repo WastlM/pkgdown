@@ -114,7 +114,7 @@ render_rmd <- function(pkg,
                        encoding = "UTF-8",
                        quiet = TRUE) {
 
-  message("Building article '", output_file, "'")
+  cat_line("Building article '", output_file, "'")
   scoped_package_context(pkg$package, pkg$topic_index, pkg$article_index)
   scoped_file_context(depth = depth)
 
@@ -142,9 +142,7 @@ build_rmarkdown_format <- function(pkg = ".",
                                    toc = TRUE) {
   # Render vignette template to temporary file
   path <- tempfile(fileext = ".html")
-  suppressMessages(
-    render_page(pkg, "vignette", data, path, depth = depth)
-  )
+  render_page(pkg, "vignette", data, path, depth = depth, quiet = TRUE)
 
   list(
     path = path,
